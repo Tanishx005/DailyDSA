@@ -1,0 +1,16 @@
+class Solution {
+    public boolean isPalindrome(String s) {
+        s = s.toLowerCase().replaceAll("[^a-z0-9]", "");   // convert to lowercase and remove 0-9s.
+        int left = 0;
+        int right = s.length() - 1;
+
+        while (left < right) {
+            if (s.charAt(left) != s.charAt(right)) {
+                return false;
+            }
+            left++;                                       // moves pointer till we find left == right.
+            right--;                                      // basically checking until statisfactory.
+        }
+        return true;        
+    }
+}
