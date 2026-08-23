@@ -1,0 +1,56 @@
+class Solution {
+    public boolean sumGame(String num) {
+
+        int n = num.length();
+
+        int sum1 = 0;
+        int sum2 = 0;
+
+        int q1 = 0;
+        int q2 = 0;
+
+        for (int i = 0; i < n; i++) {
+
+            char ch = num.charAt(i);
+
+            if (i < n / 2) {
+
+                if (ch == '?') {
+                    q1++;
+                } else {
+                    sum1 += ch - '0';
+                }
+
+            } else {
+
+                if (ch == '?') {
+                    q2++;
+                } else {
+                    sum2 += ch - '0';
+                }
+            }
+        }
+
+        int diff = sum1 - sum2;
+        int qDiff = q2 - q1;
+
+        if (qDiff % 2 != 0) {
+            return true;
+        }
+
+        return diff != 9 * (qDiff / 2);
+    }
+}
+
+/* 
+MY TP:
+
+1. Calculate sum of known digits in each half.
+2. Count ? in each half.
+3. Find the initial sum difference.
+4. Find the number of "extra" ?.
+5. Each PAIR of extra ? can create/control 9.
+6. Check whether the initial difference exactly matches
+   9 × extraQuestions / 2.
+
+*/ 
