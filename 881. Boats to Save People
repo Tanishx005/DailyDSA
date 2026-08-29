@@ -1,0 +1,31 @@
+import java.util.Arrays;
+
+class Solution {
+    public int numRescueBoats(int[] people, int limit) {
+
+        Arrays.sort(people);
+        int left = 0 ; int right = people.length-1; int boat = 0;
+        while(left<=right){
+            int tw = people[left]+people[right];
+            if(tw > limit){
+                right--;
+                boat++;
+            }
+            else{
+                boat++;
+                left++;
+                right--;
+            }
+        }
+        return boat;
+    }
+}
+
+
+
+        // sort given array
+        // make two pointers left and right. (left contains the ppl whose weight is less and right contains the ppl whose weight is heaviest)
+        // loop through given array.
+        // int total_weight = left[i]+right[i]; 
+        // if total_weight > limit . then right-- and boat++
+        // else total_weight <= limit . then boat++ and left++ and right--
