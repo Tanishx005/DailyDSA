@@ -1,0 +1,28 @@
+import java.util.*;
+
+class Solution {
+    public int[][] merge(int[][] intervals) {
+
+        Arrays.sort(intervals, (a, b) -> a[0] - b[0]); 
+        ArrayList<int[]> res = new ArrayList<>();
+        int cs = intervals[0][0]; // current start 
+        int ce = intervals[0][1]; // current end
+
+        for(int i = 1; i < intervals.length; i++){
+            int ns = intervals[i][0]; // next start
+            int ne = intervals[i][1]; // next end
+            if(ce >= ns){
+                ce = Math.max(ce,ne);
+            }
+            else{
+                res.add(new int []{cs,ce});
+                cs = ns; // making current start to next start
+                ce = ne; // making current end to next end. (basically updating to move to next ranges.)
+            }
+        }
+
+        res.add(new int[]{cs,ce});
+
+        return res.toArray(new int[res.size()][]);
+    }
+}
