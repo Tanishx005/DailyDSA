@@ -1,0 +1,57 @@
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int n = matrix.length;
+        int m = matrix[0].length;
+
+        int low = 0;
+        int high = n - 1;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+
+            if (matrix[mid][0] <= target && target <= matrix[mid][m - 1]) {
+
+                int left = 0;
+                int right = m - 1;
+
+                while (left <= right) {
+                    int col = left + (right - left) / 2;
+
+                    if (matrix[mid][col] == target) {
+                        return true;
+                    } else if (matrix[mid][col] > target) {
+                        right = col - 1;
+                    } else {
+                        left = col + 1;
+                    }
+                }
+
+                return false;
+
+            } else if (target < matrix[mid][0]) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+
+        return false;
+    }
+}
+
+/* app 1 
+we can check for row 1 ka last element and first element should greater or equals and smaller or equals
+respectively to target.
+kyuki tabhi vo us array mein present hoga .
+once we get ki kis row array mein hamara taget present hai , hten we can check
+for whole array and find the element.
+*/ 
+
+/* app 2
+
+we can ini n = length , low = 0 , high = n , loop while(low<=high) 
+then calculate mid = (low+high)/2 if mid row ka first element is < target < last element . that means we are in coorect row . else{mid ka last element is > target} then mid -1 , and vier versa mid+1. 
+row milgya then binary search 2 lagao and new low high find kro mid , target se compare , and check if mid > < and reach to target return target.
+
+*/
+
