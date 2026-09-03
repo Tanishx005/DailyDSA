@@ -34,3 +34,27 @@ class Solution {
         return res.toArray(new int[res.size()][]);
     }
 }
+
+
+/*res naam ki ArrayList banao jisme intersections store karenge.
+Do pointers lo:
+i = 0 → firstList ke liye
+j = 0 → secondList ke liye
+Jab tak dono lists khatam nahi hoti:
+Current intervals lo:
+firstList[i] = [start1, end1]
+secondList[j] = [start2, end2]
+Current dono intervals ka intersection find karo:
+start = max(start1, start2)
+end = min(end1, end2)
+Agar start <= end hai:
+Dono intervals overlap kar rahe hain.
+[start, end] ko res mein add karo.
+Ab decide karo kaunsa pointer move karna hai:
+Agar end1 <= end2 → i++
+Else → j++
+Reason: jis interval ka end chhota hai, woh future intervals ke saath intersection nahi bana sakta, isliye usko aage move kar do.
+Jab i == firstList.length ya j == secondList.length ho jaye:
+Loop stop karo.
+Finally res ko int[][] mein convert karke return karo.
+*/
