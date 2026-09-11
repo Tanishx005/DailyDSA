@@ -45,4 +45,5 @@ class Solution {
           calculate avg = sum/no of nodes.
           if(avg==curr node value) ,answer++
 
-       */
+       
+*/
