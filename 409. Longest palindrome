@@ -1,0 +1,34 @@
+class Solution {
+    public int longestPalindrome(String s) {
+
+        // create a hashmap that stores freq of characters apprearing in string s
+        HashMap<Character,Integer> map = new HashMap<>();
+
+        // traverse through string s using loop
+        for(int i = 0; i<s.length(); i++){
+            char ch = s.charAt(i);
+            map.put(ch,map.getOrDefault(ch,0)+1);
+        }
+
+        int l = 0;
+        boolean hasOdd = false;
+
+        for(int freq : map.values()){
+            // check if count of character present is even or not 
+            if(freq%2==0){
+                // on even -> store the freq of that character in lenght
+                l += freq;
+            }
+            else{
+                // on odd -> store freq-1
+                l += freq-1;
+                hasOdd = true;
+            }
+        }
+        if(hasOdd==true){
+            l += 1;
+        }
+
+        return l;        
+    }
+}
