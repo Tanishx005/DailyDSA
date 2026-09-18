@@ -1,0 +1,37 @@
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+
+        HashMap<Character, Character> map = new HashMap<>();
+        HashMap<Character, Character> map1 = new HashMap<>();
+
+        if (s.length() != t.length()) {
+            return false;
+        }
+
+        for (int i = 0; i < s.length(); i++) {
+
+            char a = s.charAt(i);
+            char b = t.charAt(i);
+
+            // s -> t mapping
+            if (map.containsKey(a)) {
+                if (map.get(a) != b) {
+                    return false;
+                }
+            }
+
+            // t -> s mapping
+            if (map1.containsKey(b)) {
+                if (map1.get(b) != a) {
+                    return false;
+                }
+            }
+
+            // create mappings
+            map.put(a, b);
+            map1.put(b, a);
+        }
+
+        return true;
+    }
+}
