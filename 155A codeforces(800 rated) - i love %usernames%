@@ -1,0 +1,28 @@
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        int best = sc.nextInt();
+        int worst = best;
+        int amazing = 0;
+
+        for (int i = 1; i < n; i++) {
+            int score = sc.nextInt();
+
+            if (score > best) {
+                best = score;
+                amazing++;
+            } else if (score < worst) {
+                worst = score;
+                amazing++;
+            }
+        }
+
+        System.out.println(amazing);
+        sc.close();
+    }
+}
