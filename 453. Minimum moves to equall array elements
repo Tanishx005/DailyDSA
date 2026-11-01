@@ -1,0 +1,23 @@
+class Solution {
+    public int minMoves(int[] nums) {
+
+        int min = Integer.MAX_VALUE;
+
+        // Step 1: Find the minimum element
+        for (int num : nums) {
+            if (num < min) {
+                min = num;
+            }
+        }
+
+        // Step 2: Calculate total moves
+        long moves = 0;
+
+        for (int num : nums) {
+            moves = moves + (num - min);
+        }
+
+        // Step 3: Return total moves
+        return (int) moves;
+    }
+}
