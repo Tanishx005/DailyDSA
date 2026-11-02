@@ -1,0 +1,69 @@
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+
+
+        // edge case: empty input aya toh
+        if (lists == null ||lists.length == 0) {
+            return null;
+        }
+
+        // har round mein 2-2 list merge
+        while (lists.length > 1) {
+
+            List<ListNode> temp = new ArrayList<>();
+
+            for (int i = 0; i< lists.length; i += 2) {
+
+                ListNode a =lists[i];
+
+                ListNode b= null;
+
+                // list available hai ya nhi (pair mein 2nd)
+                if (i + 1 < lists.length) {
+                    b = lists[i + 1];
+                }
+
+                ListNode c =mergeTwoLists(a, b);
+
+                temp.add(c);
+            }
+             // Current lists ko newly merged lists se replace kar diya
+            lists = temp.toArray(new ListNode[0]);
+        }
+
+        return lists[0];
+    }
+
+    public ListNode mergeTwoLists(ListNode a, ListNode b) {
+
+          // Dummy starting node aur c pointer banaya
+        ListNode dummy = new ListNode(-1);
+        ListNode c = dummy;
+
+        // Dono lists ke smallest nodes compare karke merge kar rahe hain
+        while (a != null && b != null) {
+
+            if (a.val < b.val) {
+                c.next = a;
+                a = a.next;
+            } 
+            else {
+                c.next = b;
+                b = b.next;
+            }
+
+            c = c.next;
+        }
+
+        // Jo list bachi hai, uske saare remaining nodes attach kar do
+        if (a != null) {
+            c.next = a;
+        } 
+        else {
+            c.next = b;
+        }
+
+        return dummy.next;
+
+    }
+} 
