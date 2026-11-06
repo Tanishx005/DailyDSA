@@ -1,0 +1,27 @@
+
+class Solution {
+    public ListNode sortList(ListNode head) {
+
+        if(head==null){
+            return null;
+        }
+
+        ArrayList <Integer> list = new ArrayList<>();
+        ListNode t = head;
+        while(t!=null){
+            list.add(t.val);
+            t=t.next;
+        }
+        Collections.sort(list);
+      
+
+       ListNode nh = new ListNode(list.get(0));
+       ListNode curr = nh;
+
+        for(int i=1; i<list.size();i++){
+            curr.next = new ListNode(list.get(i));
+            curr=curr.next;
+        }
+        return nh;
+    }
+}
