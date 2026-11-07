@@ -1,0 +1,65 @@
+
+class Solution {
+    public int[] assignTasks(int[] servers, int[] tasks) {
+
+        int n = servers.length;
+        int m = tasks.length;
+
+        int[] ans = new int[m];
+        long[] ft = new long[n];
+
+        // Available servers: minimum weight, then minimum index
+        PriorityQueue<Integer> available = new PriorityQueue<>((a, b) -> {
+            if (servers[a] != servers[b]) {
+                return Integer.compare(servers[a], servers[b]);
+            }
+            return Integer.compare(a, b);
+        });
+
+        // Busy servers: earliest free time first
+        PriorityQueue<Integer> busy = new PriorityQueue<>((a, b) -> {
+            int cmp = Long.compare(ft[a], ft[b]);
+
+            if (cmp != 0) {
+                return cmp;
+            }
+            return Integer.compare(a, b);
+        });
+
+        // Initially all servers are available
+        for (int i = 0; i < n; i++) {
+            available.offer(i);
+        }
+
+        for (int i = 0; i < m; i++) {
+
+            int bs = -1;
+
+            // Move servers that have become free
+            while (!busy.isEmpty() && ft[busy.peek()] <= i) {
+                available.offer(busy.poll());
+            }
+
+            // If all servers are busy, wait for the earliest free time
+            if (available.isEmpty()) {
+
+                long time = ft[busy.peek()];
+
+                while (!busy.isEmpty() && ft[busy.peek()] == time) {
+                    available.offer(busy.poll());
+                }
+            }
+
+            // Select the best available server
+            bs = available.poll();
+
+            ans[i] = bs;
+
+            ft[bs] = Math.max(ft[bs], i) + tasks[i];
+
+            busy.offer(bs);
+        }
+
+        return ans;
+    }
+}
