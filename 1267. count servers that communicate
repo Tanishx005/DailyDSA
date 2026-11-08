@@ -1,0 +1,18 @@
+class Solution {
+    public int countServers(int[][] grid) {
+        int m = grid.length, n = grid[0].length;
+        int[] r = new int[m], c = new int[n];  // servers on each row and column (r & c)
+        for (int i = 0; i < m; i++)
+            for (int j = 0; j < n; j++) {
+                r[i] += grid[i][j];
+                c[j] += grid[i][j];
+            }
+
+        int ans = 0;
+        for (int i = 0; i < m; i++)
+            for (int j = 0; j < n; j++)
+                if (grid[i][j] == 1 && r[i] + c[j] > 2)  // it's counted in both, so more than 2 means company
+                    ans++;
+        return ans;
+    }
+}
