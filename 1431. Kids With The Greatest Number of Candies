@@ -1,0 +1,23 @@
+class Solution {
+    public List<Boolean> kidsWithCandies(int[] c, int eC) {
+
+        int max = 0;
+        List<Boolean> l1 = new ArrayList<>();
+
+        for (int i = 0; i < c.length; i++) { // for finding max candies
+            if (c[i] > max) {
+                max = c[i];
+            }
+        }
+
+        for (int i = 0; i < c.length; i++) { // checking evry kid reach or cross max.
+            if (eC + c[i] < max) {
+                l1.add(false);
+            } else {
+                l1.add(true);
+            }
+        }
+
+        return l1;
+    }
+}
